@@ -10,7 +10,6 @@ import (
 	"strings"
 
 	"github.com/kyokomi/emoji"
-	"github.com/manifoldco/promptui"
 )
 
 // File contains properties that are needed to create a file
@@ -200,29 +199,6 @@ func exitOnError(err error, msg string) {
 	}
 }
 
-// getParameters gets parameters off the prompt
-func getParameters() (string, string, string) {
-	prompt := promptui.Prompt{
-		Label: "Name",
-	}
-	name, err := prompt.Run()
-	exitOnError(err, "Prompt failed at name")
-	prompt = promptui.Prompt{
-		Label: "Namespace",
-	}
-	nameSpace, err := prompt.Run()
-	exitOnError(err, "Prompt failed at namespace")
-	dir, err := os.Getwd()
-	exitOnError(err, "Failed to get working directory")
-	prompt = promptui.Prompt{
-		Label:   "Path",
-		Default: dir,
-	}
-	givenPath, err := prompt.Run()
-	exitOnError(err, "Prompt failed at path")
-	return name, nameSpace, givenPath
-}
-
 // createFilesInPath creates/writes files in ./
 func createFilesInPath(name string, nameSpace string, projectPath string) {
 	// .gitignore
@@ -284,16 +260,11 @@ func createFilesInPath(name string, nameSpace string, projectPath string) {
 }
 
 // prompt returns parameters
-// func prompt() (string, string, string, string) {
 func prompt() (string, string, string) {
 	scanner := bufio.NewScanner(os.Stdin)
 	fmt.Print("Name: ")
 	scanner.Scan()
 	name := scanner.Text()
-	// fmt.Print("Name: ")
-	// var name string
-	// fmt.Scanf("%s", &name)
-	// fmt.Println(name)
 	fmt.Print("Namespace: ")
 	var nameSpace string
 	fmt.Scanln(&nameSpace)
