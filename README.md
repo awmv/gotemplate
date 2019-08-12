@@ -12,6 +12,7 @@ go run main.go
 - **Path**: [$PWD] (hit enter/change it)
 
 ### File structure
+```
 {namespace}
 ├── cmd
 │   └── service
@@ -32,5 +33,6 @@ go run main.go
 ├── readme.md
 ├── runTests.sh
 └── test
+```
 
 Project {name} has been created in $PWD/{namespace} 🍺
